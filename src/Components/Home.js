@@ -14,6 +14,7 @@ import 'firebase/firestore';
 import { AuthContext } from '../Context/globalAuth';
 
 import DialogImage from './DialogImage';
+import AppBarNav from './AppBarNav';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -106,14 +107,6 @@ const Home = () => {
       .catch(console.error);
   };
 
-  const signOut = () => {
-    app
-      .auth()
-      .signOut()
-      .then(() => window.location.reload())
-      .catch(console.error);
-  };
-
   const switchDialog = (elem) => {
     setShow(!isShow);
     setCurrentData(elem);
@@ -121,16 +114,7 @@ const Home = () => {
   React.useEffect(getCurrentProjects, []);
   return (
     <React.Fragment>
-      <Container maxWidth='lg'>
-        <Button
-          onClick={signOut}
-          className={classes.signOut}
-          variant='contained'
-          color='secondary'
-        >
-          Sign Out
-        </Button>
-      </Container>
+      <AppBarNav />
       <Container maxWidth='md'>
         <Paper className={classes.root}>
           <h3>
@@ -150,12 +134,13 @@ const Home = () => {
                 onChange={(event) => setalbumName(event.target.value)}
               />
               <Input
-                inputProps={{ multiple: 'multiple' }}
+                inputProps={{
+                  multiple: 'multiple',
+                  accept: 'image/jpeg,image/x-png',
+                }}
                 fullWidth
                 type='file'
-                multiple
                 required
-                accept='image/jpeg'
                 onChange={fileChangesHandler}
               />
               <button type='submit'>Done</button>
@@ -174,7 +159,7 @@ const Home = () => {
                       }}
                       component={Paper}
                       item
-                      md={3}
+                      md={4}
                     >
                       {isShow ? (
                         <DialogImage

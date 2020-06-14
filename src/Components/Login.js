@@ -60,7 +60,11 @@ const Login = (props) => {
       .auth()
       .signInWithEmailAndPassword(email, pass)
       .then((resp) => {
-        window.location.replace('/');
+        if (resp.user.uid === 'Al6mcI4K9QW7pTP85AbqMjU9T7q1') {
+          window.location.replace('/admin');
+        } else {
+          window.location.replace('/');
+        }
       })
       .catch((err) => {
         setMessage(err.message);

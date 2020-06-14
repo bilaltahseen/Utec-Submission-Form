@@ -2,14 +2,13 @@ import React, { useContext } from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import { AuthContext } from '../Context/globalAuth';
 
-const PrivateRoute = ({ component: RouteComponent, ...rest }) => {
+const SuperRoute = ({ component: RouteComponent, ...rest }) => {
   const { currentUser } = useContext(AuthContext);
   return (
     <Route
       {...rest}
       render={(routeProps) =>
-        currentUser &&
-        currentUser.userUid !== 'Al6mcI4K9QW7pTP85AbqMjU9T7q1' ? (
+        currentUser.userUid === 'Al6mcI4K9QW7pTP85AbqMjU9T7q1' ? (
           <RouteComponent {...routeProps} />
         ) : (
           <Redirect to='/login' />
@@ -19,4 +18,4 @@ const PrivateRoute = ({ component: RouteComponent, ...rest }) => {
   );
 };
 
-export default PrivateRoute;
+export default SuperRoute;
