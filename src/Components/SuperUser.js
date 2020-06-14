@@ -1,5 +1,5 @@
 import React from 'react';
-import { makeStyles, Container, Grid } from '@material-ui/core';
+import { makeStyles, Container, Grid, Link, Button } from '@material-ui/core';
 import { app } from '../Firebase/Firebase';
 
 const useStyles = makeStyles((theme) => ({
@@ -26,6 +26,11 @@ const SuperUser = () => {
   return (
     <React.Fragment>
       <Container maxWidth='md'>
+        <Link href='/signUp'>
+          <Button variant='contained' color='primaray'>
+            Create a student account
+          </Button>
+        </Link>
         <Grid container justify='center' alignItems='center'>
           {data.map((elem) => {
             return (

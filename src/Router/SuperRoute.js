@@ -8,6 +8,7 @@ const SuperRoute = ({ component: RouteComponent, ...rest }) => {
     <Route
       {...rest}
       render={(routeProps) =>
+        currentUser &&
         currentUser.userUid === 'Al6mcI4K9QW7pTP85AbqMjU9T7q1' ? (
           <RouteComponent {...routeProps} />
         ) : (

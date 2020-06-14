@@ -65,7 +65,7 @@ const SignUp = (props) => {
       .createUserWithEmailAndPassword(email, pass)
       .then((user) => {
         user.user.updateProfile({ displayName: fname + lname }).then((res) => {
-          props.history.push('/');
+          props.history.push('/admin');
         });
       })
       .catch((err) => setMessage(err.message));
@@ -145,8 +145,8 @@ const SignUp = (props) => {
           <p style={{ color: 'red' }}>{message}</p>
           <Grid container justify='flex-end'>
             <Grid item>
-              <Link href='/login' variant='body2'>
-                Already have an account? Sign in
+              <Link href='/admin' variant='body2'>
+                Back
               </Link>
             </Grid>
           </Grid>

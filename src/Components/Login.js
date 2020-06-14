@@ -117,13 +117,6 @@ const Login = (props) => {
             Sign In
           </Button>
           <p style={{ color: 'red' }}>{message}</p>
-          <Grid container>
-            <Grid item>
-              <Link href='/signUp' variant='body2'>
-                {"Don't have an account? Sign Up"}
-              </Link>
-            </Grid>
-          </Grid>
         </form>
       </div>
       <Box mt={8}>

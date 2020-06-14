@@ -20,9 +20,11 @@ const Router = () => {
       <PrivateRoute path='/page1' component={Page1} />
       <PrivateRoute path='/page2' component={Page2} />
       <PrivateRoute path='/page3' component={Page3} />
+
       <SuperRoute path='/admin' component={SuperUser} />
+      <SuperRoute path='/signUp' component={SignUp} />
+
       <Route path='/login' component={Login} />
-      <Route path='/signUp' component={SignUp} />
     </React.Fragment>
   );
 };
