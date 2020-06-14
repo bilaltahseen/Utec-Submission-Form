@@ -56,6 +56,8 @@ const SignUp = (props) => {
   const [fname, setFname] = React.useState('');
   const [lname, setLname] = React.useState('');
 
+  const [message, setMessage] = React.useState('');
+
   const createUser = (event) => {
     event.preventDefault();
     app
@@ -66,7 +68,7 @@ const SignUp = (props) => {
           props.history.push('/');
         });
       })
-      .catch((err) => alert(err));
+      .catch((err) => setMessage(err.message));
   };
   return (
     <Container component='main' maxWidth='xs'>
@@ -140,6 +142,7 @@ const SignUp = (props) => {
           >
             Sign Up
           </Button>
+          <p style={{ color: 'red' }}>{message}</p>
           <Grid container justify='flex-end'>
             <Grid item>
               <Link href='/login' variant='body2'>

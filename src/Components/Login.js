@@ -53,6 +53,7 @@ const Login = (props) => {
   const classes = useStyles();
   const [email, setEmail] = React.useState('');
   const [pass, setPass] = React.useState('');
+  const [message, setMessage] = React.useState('');
   const authenticateUser = (event) => {
     event.preventDefault();
     app
@@ -62,8 +63,7 @@ const Login = (props) => {
         window.location.replace('/');
       })
       .catch((err) => {
-        alert(err);
-        window.location.reload();
+        setMessage(err.message);
       });
   };
 
@@ -112,6 +112,7 @@ const Login = (props) => {
           >
             Sign In
           </Button>
+          <p style={{ color: 'red' }}>{message}</p>
           <Grid container>
             <Grid item>
               <Link href='/signUp' variant='body2'>
