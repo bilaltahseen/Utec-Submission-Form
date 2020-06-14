@@ -13,6 +13,8 @@ import 'firebase/storage';
 import 'firebase/firestore';
 import { AuthContext } from '../Context/globalAuth';
 
+import DialogImage from './DialogImage';
+
 const useStyles = makeStyles((theme) => ({
   root: {
     height: '50vh',
@@ -35,8 +37,10 @@ const Home = () => {
   const classes = useStyles();
   const [albumName, setalbumName] = React.useState('');
   const [images, setImages] = React.useState([]);
-  let [downloadUrls, setImageUrls] = React.useState([]);
+
   const [getData, setData] = React.useState([]);
+  const [isShow, setShow] = React.useState(false);
+  const [currentData, setCurrentData] = React.useState(null);
   const { currentUser } = React.useContext(AuthContext);
 
   const fileChangesHandler = (event) => {
@@ -50,7 +54,7 @@ const Home = () => {
   };
 
   const uploadAsPromises = () => {
-    let imageUrlstTemp = [...downloadUrls];
+    let imageUrlstTemp = [];
     let promises = [];
     images.forEach((file) => {
       const uploadTask = app
@@ -64,7 +68,7 @@ const Home = () => {
     });
 
     Promise.all(promises)
-      .then(() => firestoreDataUpload((imageUrlstTemp = imageUrlstTemp)))
+      .then(() => firestoreDataUpload(imageUrlstTemp))
       .catch(console.error);
   };
 
@@ -108,6 +112,11 @@ const Home = () => {
       .signOut()
       .then(() => window.location.reload())
       .catch(console.error);
+  };
+
+  const switchDialog = (elem) => {
+    setShow(!isShow);
+    setCurrentData(elem);
   };
   React.useEffect(getCurrentProjects, []);
   return (
@@ -159,11 +168,28 @@ const Home = () => {
             {getData
               ? getData.map((elem) => {
                   return (
-                    <Grid component={Paper} item md={3}>
+                    <Grid
+                      onClick={() => {
+                        switchDialog(elem);
+                      }}
+                      component={Paper}
+                      item
+                      md={3}
+                    >
+                      {isShow ? (
+                        <DialogImage
+                          data={currentData}
+                          open={isShow}
+                          handleClose={() => setShow(!isShow)}
+                        />
+                      ) : (
+                        ''
+                      )}
                       <img
                         src={elem.albumImages[0]}
                         width='200px'
                         height='200px'
+                        alt={`imageid${Math.random()}`}
                       />
                       <p>{elem.albumName}</p>
                     </Grid>

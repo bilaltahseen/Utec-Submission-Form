@@ -1,10 +1,9 @@
 import React from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { Route } from 'react-router-dom';
 import PrivateRoute from './PrivateRoute';
 import Login from '../Components/Login';
 import SignUp from '../Components/SignUp';
 import Home from '../Components/Home';
-import { AuthContext } from '../Context/globalAuth';
 
 const Router = () => {
   return (
